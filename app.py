@@ -339,6 +339,9 @@ def internal_error(error):
 
 # With:
 if __name__ == '__main__':
+    # Production settings
+    debug_mode = os.environ.get('DEBUG', 'False').lower() == 'true'
+
     # Ensure database directory exists
     os.makedirs('database', exist_ok=True)
 
@@ -350,7 +353,13 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"❌ Error creating database tables: {e}")
 
-    # Get port from environment variable or default to 5000
-    port = int(os.environ.get('PORT', 5000))
-    print(f"🚀 Starting College Predictor Application on port {port}...")
-    app.run(host='0.0.0.0', port=port)
+    print("🚀 Starting College Predictor Application...")
+    print(f"📊 Debug mode: {debug_mode}")
+
+    if debug_mode:
+        app.run(debug=True, host='0.0.0.0', port=5000)
+    else:
+        # For production use gunicorn
+        from werkzeug.serving import run_simple
+
+        run_simple('0.0.0.0', 5000, app, use_reloader=False, use_debugger=False)

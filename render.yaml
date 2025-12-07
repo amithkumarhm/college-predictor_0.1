@@ -9,6 +9,12 @@ services:
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.0
+        value: 3.9.16
       - key: SECRET_KEY
         generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: college_predictor_db
+          property: connectionString
+    healthCheckPath: /
+    autoDeploy: true
