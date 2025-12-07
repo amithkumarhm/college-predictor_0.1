@@ -21,8 +21,16 @@ An AI-powered web application that predicts suitable colleges for MCA, MBA, and 
 - **Deployment**: Docker, Render
 
 ## Installation
+create python env python-3.9.16
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd college-predictor
+python -m venv venv
+source venv/bin/activate
+
+pip install --upgrade pip
+pip install -r requirements.txt
+
+python database/init_db.py
+python model_training.py
+
+Render Build Command:
+pip install --upgrade pip && pip install -r requirements.txt && python database/init_db.py && python model_training.py

@@ -1,4 +1,3 @@
-# app.py - Updated to handle all locations properly
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -321,23 +320,6 @@ def internal_error(error):
     return render_template('500.html'), 500
 
 
-# if __name__ == '__main__':
-#     # Ensure database directory exists
-#     os.makedirs('database', exist_ok=True)
-#
-#     # Create database tables
-#     with app.app_context():
-#         try:
-#             db.create_all()
-#             print("✅ Database tables created successfully")
-#         except Exception as e:
-#             print(f"❌ Error creating database tables: {e}")
-#
-#     print("🚀 Starting College Predictor Application...")
-#     print("📊 Access the application at: http://localhost:5000")
-#     app.run(debug=True, host='0.0.0.0', port=5000)
-
-# With:
 if __name__ == '__main__':
     # Production settings
     debug_mode = os.environ.get('DEBUG', 'False').lower() == 'true'
