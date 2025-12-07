@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            CollegePredictor
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}" class="btn btn-primary">
+                <i class="fas fa-rocket"></i>
+                Get Started
+            </a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container hero-content fade-in-up">
+        <h1>Find Your Perfect College with AI</h1>
+        <p>Advanced machine learning algorithms analyze historical data to predict your best college matches for MCA, MBA, and MTech programs in Karnataka.</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('register') }}" class="btn btn-primary">
+                <i class="fas fa-bolt"></i>
+                Start Predicting
+            </a>
+            <a href="#features" class="btn btn-secondary">
+                <i class="fas fa-play-circle"></i>
+                See How It Works
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Choose College Predictor?</h2>
+            <p>Cutting-edge technology meets educational expertise to guide your college selection process</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card slide-in-left">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Predictions</h3>
+                <p>Our advanced ML models analyze 5+ years of cutoff data to provide accurate college predictions based on your PGCET rank and preferences.</p>
+            </div>
+            <div class="feature-card slide-in-left" style="animation-delay: 0.2s;">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Comprehensive Database</h3>
+                <p>Access complete information for 100+ colleges across Karnataka with detailed cutoff ranges, seat availability, and historical trends.</p>
+            </div>
+            <div class="feature-card slide-in-left" style="animation-delay: 0.4s;">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Smart Chat Assistant</h3>
+                <p>Interactive AI chatbot guides you through the prediction process and provides instant college recommendations based on your inputs.</p>
+            </div>
+            <div class="feature-card slide-in-left" style="animation-delay: 0.6s;">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Real-time Analysis</h3>
+                <p>Get instant results with three-tier matching: Exact matches, Near matches, and Weak matches based on your rank and category.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section id="about" class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Trusted by Thousands</h2>
+            <p>Join thousands of students who have found their perfect college through our platform</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Successful Predictions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">180+</div>
+                <div class="stat-label">Colleges Covered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Program Types</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Accuracy Rate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Simple steps to get your personalized college predictions</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>1. Create Account</h3>
+                <p>Sign up for free and get access to our advanced prediction system</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <h3>2. Enter Details</h3>
+                <p>Provide your PGCET rank, category, preferred location, and program</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>3. Get Predictions</h3>
+                <p>Receive AI-powered college recommendations instantly</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>4. Choose College</h3>
+                <p>Compare colleges and make informed admission decisions</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

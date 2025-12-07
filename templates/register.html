@@ -1,0 +1,288 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <!-- Background Elements -->
+    <div class="auth-bg-elements">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <div class="auth-wrapper">
+        <!-- Left Side - Branding -->
+        <div class="auth-branding">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>CollegePredictor</span>
+                </div>
+                <h1 class="brand-title">Join Us Today!</h1>
+                <p class="brand-subtitle">Create your account and unlock the power of AI-driven college predictions for your educational journey.</p>
+
+                <!-- Benefits List -->
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Instant Predictions</h4>
+                            <p>Get AI-powered college recommendations in seconds</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Smart Assistant</h4>
+                            <p>24/7 AI chatbot to guide your college selection</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Data Analytics</h4>
+                            <p>Comprehensive insights based on historical data</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Steps -->
+                <div class="registration-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-info">
+                            <div class="step-title">Create Account</div>
+                            <div class="step-desc">Sign up in 30 seconds</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-info">
+                            <div class="step-title">Enter Details</div>
+                            <div class="step-desc">Provide your rank & preferences</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-info">
+                            <div class="step-title">Get Predictions</div>
+                            <div class="step-desc">Receive AI recommendations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Registration Form -->
+        <div class="auth-form-container">
+            <div class="auth-form-card">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Join thousands of students making smarter college choices</p>
+                </div>
+
+                {% if error %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form id="registerForm" method="POST" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="username">
+                                <i class="fas fa-user"></i>
+                                Username
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="text" id="username" name="username" class="form-control" required
+                                       placeholder="Choose a username">
+                                <div class="input-icon">
+                                    <i class="fas fa-at"></i>
+                                </div>
+                            </div>
+                            <div class="input-hint">Must be 3-20 characters</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" name="email" class="form-control" required
+                                   placeholder="Enter your email">
+                            <div class="input-icon">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">
+                                <i class="fas fa-lock"></i>
+                                Password
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="password" id="password" name="password" class="form-control" required
+                                       placeholder="Create a password">
+                                <div class="input-icon">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <i class="fas fa-lock"></i>
+                                Confirm Password
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required
+                                       placeholder="Confirm your password">
+                                <div class="input-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText">Password strength</div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+                        </label>
+
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="newsletter">
+                            <span class="checkmark"></span>
+                            Send me updates about new features and colleges
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-submit">
+                        <span class="btn-text">Create Account</span>
+                        <div class="btn-loader">
+                            <div class="loader-spinner"></div>
+                        </div>
+                        <i class="fas fa-rocket"></i>
+                    </button>
+
+                    <div class="auth-divider">
+                        <span>or sign up with</span>
+                    </div>
+
+                    <div class="social-auth">
+                        <button type="button" class="btn btn-social btn-google">
+                            <i class="fab fa-google"></i>
+                            Google
+                        </button>
+                        <button type="button" class="btn btn-social btn-github">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </button>
+                    </div>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="{{ url_for('login') }}" class="auth-link">Sign in here</a></p>
+                </div>
+            </div>
+
+            <!-- Back to Home -->
+            <div class="back-home">
+                <a href="{{ url_for('index') }}" class="back-home-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script>
+function togglePassword(fieldId) {
+    const passwordInput = document.getElementById(fieldId);
+    const toggleIcon = passwordInput.parentNode.querySelector('.password-toggle i');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.className = 'fas fa-eye-slash';
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.className = 'fas fa-eye';
+    }
+}
+
+// Password strength indicator
+document.getElementById('password').addEventListener('input', function(e) {
+    const password = e.target.value;
+    const strengthFill = document.getElementById('strengthFill');
+    const strengthText = document.getElementById('strengthText');
+
+    let strength = 0;
+    let text = 'Password strength';
+    let color = '#ef4444';
+
+    if (password.length >= 8) strength += 25;
+    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 25;
+    if (password.match(/\d/)) strength += 25;
+    if (password.match(/[^a-zA-Z\d]/)) strength += 25;
+
+    if (strength >= 75) {
+        text = 'Strong password';
+        color = '#10b981';
+    } else if (strength >= 50) {
+        text = 'Good password';
+        color = '#f59e0b';
+    } else if (strength >= 25) {
+        text = 'Weak password';
+        color = '#f59e0b';
+    } else if (password.length > 0) {
+        text = 'Very weak password';
+        color = '#ef4444';
+    }
+
+    strengthFill.style.width = strength + '%';
+    strengthFill.style.background = color;
+    strengthText.textContent = text;
+    strengthText.style.color = color;
+});
+
+// Form submission animation
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const submitBtn = this.querySelector('.auth-submit');
+    submitBtn.classList.add('loading');
+});
+</script>
+{% endblock %}

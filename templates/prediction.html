@@ -1,0 +1,296 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            CollegePredictor
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('dashboard') }}" class="nav-link">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a></li>
+            <li><a href="{{ url_for('prediction') }}" class="nav-link active">
+                <i class="fas fa-search"></i>
+                Prediction
+            </a></li>
+            <li><a href="{{ url_for('logout') }}" class="btn btn-secondary logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a></li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+        <a href="{{ url_for('dashboard') }}" class="mobile-nav-link">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+        <a href="{{ url_for('prediction') }}" class="mobile-nav-link active">
+            <i class="fas fa-search"></i>
+            Prediction
+        </a>
+        <a href="{{ url_for('logout') }}" class="mobile-nav-link logout">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="prediction-page">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="prediction-header">
+            <div class="header-content">
+                <h1 class="page-title">
+                    College <span class="gradient-text">Prediction</span>
+                </h1>
+                <p class="page-subtitle">
+                    Enter your details below to get AI-powered college recommendations based on your PGCET rank and preferences.
+                </p>
+                <div class="prediction-steps">
+                    <div class="step-indicator active">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Enter Details</div>
+                    </div>
+                    <div class="step-indicator">
+                        <div class="step-number">2</div>
+                        <div class="step-text">AI Analysis</div>
+                    </div>
+                    <div class="step-indicator">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Get Results</div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-graphic">
+                <div class="prediction-visual">
+                    <i class="fas fa-magic"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prediction Form -->
+        <div class="prediction-form-section">
+            <div class="form-container">
+                <form id="predictionForm" class="prediction-form">
+                    <div class="form-header">
+                        <h2>Your Information</h2>
+                        <p>Fill in the details to get accurate college predictions</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <!-- College Type -->
+                        <div class="form-group">
+                            <label for="college_type" class="form-label">
+                                <i class="fas fa-graduation-cap"></i>
+                                Program Type
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="college_type" name="college_type" class="form-select" required>
+                                    <option value="">Select your program</option>
+                                    <option value="MCA">MCA - Master of Computer Applications</option>
+                                    <option value="MBA">MBA - Master of Business Administration</option>
+                                    <option value="MTech">MTech - Master of Technology</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+
+                        <!-- Exam Type -->
+                        <div class="form-group">
+                            <label for="exam_type" class="form-label">
+                                <i class="fas fa-file-alt"></i>
+                                Exam Type
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="exam_type" name="exam_type" class="form-select" required>
+                                    <option value="">Select exam type</option>
+                                    <option value="PGCET">PGCET - Post Graduate Common Entrance Test</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="form-group">
+                            <label for="category" class="form-label">
+                                <i class="fas fa-users"></i>
+                                Category
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="category" name="category" class="form-select" required>
+                                    <option value="">Select your category</option>
+                                    <option value="GM">GM - General Merit</option>
+                                    <option value="OBC">OBC - Other Backward Classes</option>
+                                    <option value="SC">SC - Scheduled Caste</option>
+                                    <option value="ST">ST - Scheduled Tribe</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+
+                        <!-- Preferred Location - UPDATED WITH CORRECT NAMES -->
+                        <div class="form-group">
+                            <label for="place" class="form-label">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Preferred Location
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="place" name="place" class="form-select" required>
+                                    <option value="">Select location preference</option>
+                                    <option value="All">All Locations</option>
+                                    <option value="Bengaluru">Bengaluru</option>
+                                    <option value="Mandya">Mandya</option>
+                                    <option value="Mysore">Mysore</option>
+                                    <option value="Belagavi">Belagavi</option>
+                                    <option value="Dharwad">Dharwad</option>
+                                    <option value="Hubballi">Hubballi</option>
+                                    <option value="Davanagere">Davanagere</option>
+                                    <option value="Mangaluru">Mangaluru</option>
+                                    <option value="Hassan">Hassan</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+
+                        <!-- Rank Input -->
+                        <div class="form-group full-width">
+                            <label for="rank" class="form-label">
+                                <i class="fas fa-trophy"></i>
+                                Your PGCET Rank
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number" id="rank" name="rank" class="form-input"
+                                       placeholder="Enter your PGCET rank (e.g., 1500)" min="1" required>
+                                <div class="input-icon">
+                                    <i class="fas fa-hashtag"></i>
+                                </div>
+                            </div>
+                            <div class="input-hint">
+                                Enter your actual PGCET rank for accurate predictions
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large btn-predict">
+                            <span class="btn-text">
+                                <i class="fas fa-bolt"></i>
+                                Predict Colleges
+                            </span>
+                            <div class="btn-loader">
+                                <div class="loader-spinner"></div>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="predictionResults" class="results-section">
+            <!-- Results will be dynamically inserted here -->
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Our system analyzes historical cutoff data and trends to provide accurate predictions</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Exact Match Results</h3>
+                    <p>Get colleges where your rank falls within the cutoff range for guaranteed admission</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Real-time Results</h3>
+                    <p>Instant predictions with detailed college information and cutoff ranges</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+<script>
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    }
+
+    // Form submission animation
+    const predictionForm = document.getElementById('predictionForm');
+    if (predictionForm) {
+        predictionForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('.btn-predict');
+            submitBtn.classList.add('loading');
+
+            // Update step indicator
+            document.querySelectorAll('.step-indicator').forEach((step, index) => {
+                if (index === 1) {
+                    step.classList.add('active');
+                } else if (index > 1) {
+                    step.classList.remove('active');
+                }
+            });
+        });
+    }
+});
+
+// Update step indicator when results are shown
+function updateStepIndicatorToResults() {
+    document.querySelectorAll('.step-indicator').forEach((step, index) => {
+        if (index === 2) {
+            step.classList.add('active');
+        } else if (index < 2) {
+            step.classList.remove('active');
+        }
+    });
+}
+</script>
+{% endblock %}

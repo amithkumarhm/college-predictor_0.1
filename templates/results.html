@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">CollegePredictor</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="dashboard">
+    <aside class="sidebar">
+        <ul class="sidebar-nav">
+            <li><a href="{{ url_for('dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="{{ url_for('prediction') }}"><i class="fas fa-search"></i> College Prediction</a></li>
+            <li><a href="{{ url_for('results') }}" class="active"><i class="fas fa-history"></i> Prediction History</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="card">
+            <h1>Prediction History</h1>
+            <p>Your previous college predictions</p>
+        </div>
+
+        <div id="historyResults">
+            <div class="card">
+                <p>Your prediction history will appear here.</p>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
